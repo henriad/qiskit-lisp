@@ -1,0 +1,13 @@
+;; pseudocode lisp example 
+
+(define quantum-superposition
+    (lambda ()
+					; Initialize the quantum register with one qubit
+      (let ((qubit (create-qubit)))
+					; Apply a Hadamard gate to the qubit
+	(apply-hadamard qubit)
+
+					; Measure the qubit to observe its state
+	(let ((result (measure qubit)))
+	  (display "The qubit is in state: ")
+	  (display result)))))
