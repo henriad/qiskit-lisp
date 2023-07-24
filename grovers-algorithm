@@ -1,0 +1,102 @@
+;; Define a function to create n qubits in the state |0>
+(define create-n-qubits
+  (lambda (n) ; λ
+    (make-list n 0))) ; Create a list of n zeroes
+
+;; Define a function to apply the Hadamard gate to all qubits
+(define apply-hadamard-to-all
+  (lambda (qubits) ; λ
+    ; Apply Hadamard gate to each qubit
+    (map (lambda (qubit) (sqrt 1/2) qubit (+ 1i (sqrt -1/2) qubit)) qubits)))
+
+;; Define a function to apply a single Grover iteration
+(define apply-grover-iteration
+  (lambda (qubits target-state) ; λ
+    ; Apply inversion about the average
+    (let* ((n (length qubits))
+           (target-amplitude (/ 1 (sqrt n))))
+      ; Calculate the amplitude of the target state
+      (define target-amplitude (if (equal? qubits target-state) target-amplitude (- target-amplitude)))
+      ; Apply inversion about the average
+      (map (lambda (qubit) (- (* 2 target-amplitude) qubit)) qubits))))
+
+;; Define a function to measure all qubits and return the result
+(define measure-all
+  (lambda (qubits)  ; λ
+    qubits)) ; For simplicity, we will return the qubits themselves for demonstration purposes.
+
+;; Define Grover's algorithm
+(define grover-algorithm
+  (lambda ()  ; λ
+    ; Initialize the quantum register with n qubits in state |0>
+    (let ((n 4))
+      (let ((qubits (create-n-qubits n)))
+        ; Apply Hadamard gate to all qubits to create a superposition
+        (set! qubits (apply-hadamard-to-all qubits))
+        ; Define the target state we want to find
+        (let ((target-state '(0 1 1 0)))
+          ; Perform Grover iterations
+          (let ((num-iterations (int (sqrt n)))) ; ;; Define a function to create n qubits in the state |0>
+(define create-n-qubits
+  (lambda (n) ; λ
+    (make-list n 0))) ; Create a list of n zeroes
+
+;; Define a function to apply the Hadamard gate to all qubits
+(define apply-hadamard-to-all
+  (lambda (qubits) ; λ
+    ; Apply Hadamard gate to each qubit
+    (map (lambda (qubit) (sqrt 1/2) qubit (+ 1i (sqrt -1/2) qubit)) qubits)))
+
+;; Define a function to apply a single Grover iteration
+(define apply-grover-iteration
+  (lambda (qubits target-state)
+    ; Apply inversion about the average
+    (let* ((n (length qubits))
+           (target-amplitude (/ 1 (sqrt n))))
+      ; Calculate the amplitude of the target state
+      (define target-amplitude (if (equal? qubits target-state) target-amplitude (- target-amplitude)))
+      ; Apply inversion about the average
+      (map (lambda (qubit) (- (* 2 target-amplitude) qubit)) qubits))))
+
+;; Define a function to measure all qubits and return the result
+(define measure-all
+  (lambda (qubits)
+    qubits)) ; For simplicity, we will return the qubits themselves for demonstration purposes.
+
+;; Define Grover's algorithm
+(define grover-algorithm
+  (lambda () ; λ
+    ; Initialize the quantum register with n qubits in state |0>
+    (let ((n 4))
+      (let ((qubits (create-n-qubits n)))
+        ; Apply Hadamard gate to all qubits to create a superposition
+        (set! qubits (apply-hadamard-to-all qubits))
+        ; Define the target state we want to find
+        (let ((target-state '(0 1 1 0)))
+          ; Perform Grover iterations
+          (let ((num-iterations (int (sqrt n)))) ;√n
+            (do ((i 0 (+ i 1)))
+                ((= i num-iterations))
+              (set! qubits (apply-grover-iteration qubits target-state))))
+          ; Measure the qubits and check the result
+          (let ((result (measure-all qubits)))
+            ; Check if the target state is found
+            (if (equal? result target-state)
+                (display "Found the target state: " result)
+                (display "Target state not found."))))))))
+
+; Run Grover's algorithm
+(grover-algorithm)
+
+            (do ((i 0 (+ i 1)))
+                ((= i num-iterations))
+              (set! qubits (apply-grover-iteration qubits target-state))))
+          ; Measure the qubits and check the result
+          (let ((result (measure-all qubits)))
+            ; Check if the target state is found
+            (if (equal? result target-state)
+                (display "Found the target state: " result)
+                (display "Target state not found."))))))))
+
+; Run Grover's algorithm
+(grover-algorithm)
